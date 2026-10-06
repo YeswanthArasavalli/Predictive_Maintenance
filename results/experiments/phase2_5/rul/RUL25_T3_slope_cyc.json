@@ -1,0 +1,217 @@
+{
+  "experiment_id": "RUL25_T3_slope_cyc",
+  "phase": 2.5,
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": true,
+  "horizon": null,
+  "temporal_family": "slope",
+  "temporal_windows": [
+    5
+  ],
+  "temporal_lags": [
+    5
+  ],
+  "temporal_n_monitors": 8,
+  "temporal_metadata": {
+    "family": "slope",
+    "windows": [
+      5
+    ],
+    "lags": [
+      5
+    ],
+    "include_range": false,
+    "n_monitors_requested": 8,
+    "monitors_selected_train_only": [
+      "sensor_11",
+      "sensor_15",
+      "sensor_04",
+      "sensor_14",
+      "sensor_09",
+      "sensor_17",
+      "sensor_03",
+      "sensor_12"
+    ],
+    "temporal_feature_names": [
+      "sensor_11__slope5",
+      "sensor_15__slope5",
+      "sensor_04__slope5",
+      "sensor_14__slope5",
+      "sensor_09__slope5",
+      "sensor_17__slope5",
+      "sensor_03__slope5",
+      "sensor_12__slope5"
+    ],
+    "n_temporal_features": 8
+  },
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "RUL-T3: current + cycle + causal slope/trend features.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21",
+    "cycle",
+    "sensor_11__slope5",
+    "sensor_15__slope5",
+    "sensor_04__slope5",
+    "sensor_14__slope5",
+    "sensor_09__slope5",
+    "sensor_17__slope5",
+    "sensor_03__slope5",
+    "sensor_12__slope5"
+  ],
+  "n_features": 33,
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 33,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 31.898134742397776,
+    "rmse": 43.14324597051872,
+    "r2": 0.7629946633503943,
+    "prognostic_score_rows": 280550936.6842611,
+    "prognostic_score_last_per_engine": 58.46876285228801
+  },
+  "summary_metrics_flat": {
+    "mae": 31.898134742397776,
+    "rmse": 43.14324597051872,
+    "r2": 0.7629946633503943,
+    "prognostic_score_rows": 280550936.6842611,
+    "prognostic_score_last_per_engine": 58.46876285228801
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 50,
+      "cycle": 62,
+      "operating_regime": 1,
+      "y_true": 110,
+      "y_pred": 299.1900247307141,
+      "error": 189.19002473071407,
+      "abs_error": 189.19002473071407
+    },
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 216.32516459794505,
+      "error": -179.67483540205495,
+      "abs_error": 179.67483540205495
+    },
+    {
+      "unit_id": 171,
+      "cycle": 11,
+      "operating_regime": 4,
+      "y_true": 388,
+      "y_pred": 213.1197753109123,
+      "error": -174.8802246890877,
+      "abs_error": 174.8802246890877
+    },
+    {
+      "unit_id": 171,
+      "cycle": 62,
+      "operating_regime": 4,
+      "y_true": 337,
+      "y_pred": 170.2611969831625,
+      "error": -166.7388030168375,
+      "abs_error": 166.7388030168375
+    },
+    {
+      "unit_id": 171,
+      "cycle": 52,
+      "operating_regime": 5,
+      "y_true": 347,
+      "y_pred": 181.36499900334286,
+      "error": -165.63500099665714,
+      "abs_error": 165.63500099665714
+    },
+    {
+      "unit_id": 50,
+      "cycle": 86,
+      "operating_regime": 0,
+      "y_true": 86,
+      "y_pred": 251.41126046690198,
+      "error": 165.41126046690198,
+      "abs_error": 165.41126046690198
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 228.97742388707005,
+      "error": -164.02257611292995,
+      "abs_error": 164.02257611292995
+    },
+    {
+      "unit_id": 50,
+      "cycle": 106,
+      "operating_regime": 5,
+      "y_true": 66,
+      "y_pred": 226.8243854368704,
+      "error": 160.8243854368704,
+      "abs_error": 160.8243854368704
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 237.4618944164055,
+      "error": -160.5381055835945,
+      "abs_error": 160.5381055835945
+    },
+    {
+      "unit_id": 50,
+      "cycle": 66,
+      "operating_regime": 0,
+      "y_true": 106,
+      "y_pred": 264.5147166245925,
+      "error": 158.5147166245925,
+      "abs_error": 158.5147166245925
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 2.190765999999712,
+    "fit_predict_seconds": 0.4344087000008585
+  },
+  "executed_utc": "2026-10-06T05:41:17.817060+00:00"
+}

@@ -1,0 +1,166 @@
+{
+  "experiment_id": "RUL_gb_regimeB_noCyc_cfgA",
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": false,
+  "horizon": null,
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "HistGB Regressor on regime-conditioned features.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 24,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 36.62669707929769,
+    "rmse": 50.43242922365165,
+    "r2": 0.6761437621498678,
+    "prognostic_score_rows": 1051540398.8453286,
+    "prognostic_score_last_per_engine": 75.81636571956778
+  },
+  "summary_metrics_flat": {
+    "mae": 36.62669707929769,
+    "rmse": 50.43242922365165,
+    "r2": 0.6761437621498678,
+    "prognostic_score_rows": 1051540398.8453286,
+    "prognostic_score_last_per_engine": 75.81636571956778
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 142.34091260204102,
+      "error": -253.65908739795898,
+      "abs_error": 253.65908739795898
+    },
+    {
+      "unit_id": 171,
+      "cycle": 4,
+      "operating_regime": 0,
+      "y_true": 395,
+      "y_pred": 147.12300112284183,
+      "error": -247.87699887715817,
+      "abs_error": 247.87699887715817
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 174.4896313822034,
+      "error": -218.5103686177966,
+      "abs_error": 218.5103686177966
+    },
+    {
+      "unit_id": 171,
+      "cycle": 11,
+      "operating_regime": 4,
+      "y_true": 388,
+      "y_pred": 169.56510087433156,
+      "error": -218.43489912566844,
+      "abs_error": 218.43489912566844
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 180.62728292880092,
+      "error": -217.37271707119908,
+      "abs_error": 217.37271707119908
+    },
+    {
+      "unit_id": 171,
+      "cycle": 8,
+      "operating_regime": 0,
+      "y_true": 391,
+      "y_pred": 174.04118029829547,
+      "error": -216.95881970170453,
+      "abs_error": 216.95881970170453
+    },
+    {
+      "unit_id": 171,
+      "cycle": 17,
+      "operating_regime": 0,
+      "y_true": 382,
+      "y_pred": 168.70789903461667,
+      "error": -213.29210096538333,
+      "abs_error": 213.29210096538333
+    },
+    {
+      "unit_id": 171,
+      "cycle": 12,
+      "operating_regime": 3,
+      "y_true": 387,
+      "y_pred": 176.6961401066422,
+      "error": -210.3038598933578,
+      "abs_error": 210.3038598933578
+    },
+    {
+      "unit_id": 171,
+      "cycle": 19,
+      "operating_regime": 1,
+      "y_true": 380,
+      "y_pred": 173.9097093791702,
+      "error": -206.0902906208298,
+      "abs_error": 206.0902906208298
+    },
+    {
+      "unit_id": 171,
+      "cycle": 16,
+      "operating_regime": 0,
+      "y_true": 383,
+      "y_pred": 179.29456065269434,
+      "error": -203.70543934730566,
+      "abs_error": 203.70543934730566
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.43237430000590393,
+    "fit_predict_seconds": 0.2812181999979657
+  },
+  "executed_utc": "2026-10-05T18:13:14.164038+00:00"
+}

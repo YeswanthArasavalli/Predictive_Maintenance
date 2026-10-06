@@ -1,0 +1,21 @@
+{
+  "phase": 2.6,
+  "cost_framework": "Expected Cost = FN * C_FN + FP * C_FP",
+  "illustrative_cost_label": "illustrative / scenario assumption, not observed real-world financial data.",
+  "input_hashes": {
+    "FR25_T0_anchor_cycle.parquet": "b5471dca68d41d8f4be7d4dc19b3fa4ff27f04f1b5ddcb086785a63c51f904c4",
+    "FR25_T4_combined_cyc.parquet": "aeb25c922bc4c7a3b3f91958248bd45fa64d26c9e12a3854573500ac0926582f",
+    "FD004_val.parquet": "205e67221115fe7877048758ffbdff5a6b723400d7aae48aa0bbdf7e2f5fbe52"
+  },
+  "outputs": [
+    "alert_fatigue.json",
+    "bootstrap.csv",
+    "cost_ratio_sensitivity.csv",
+    "decision_cost_comparison.csv",
+    "engine_level_analysis.csv",
+    "false_negative_analysis.json",
+    "rul_decision_analysis.json",
+    "threshold_cost.csv"
+  ],
+  "completed_utc": "2026-10-06T06:53:52.424552+00:00"
+}

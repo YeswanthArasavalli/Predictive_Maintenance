@@ -1,0 +1,72 @@
+# Phase 2.6 — Decision & Cost-Sensitive Validation
+#
+# SCIENTIFIC QUESTION: do the measured Phase 2 / Phase 2.5 predictive
+# improvements translate into meaningful DECISION-LEVEL value under explicit,
+# transparent, ILLUSTRATIVE cost assumptions?
+#
+# This phase is validation-only and NON-NEURAL. It retrains NOTHING and reads
+# ONLY:
+#   - existing Phase 2.5 validation prediction rows
+#     (results/experiments/phase2_5/val_rows/*.parquet), and
+#   - the sealed FD004 VALIDATION partition (data/processed/FD004_val.parquet)
+#     for per-row raw RUL (needed for the false-negative profile).
+# It NEVER loads test_FD004.txt / RUL_FD004.txt.
+#
+# COST MODEL (see src/business/decision.py):
+#   Expected Cost = FN * C_FN + FP * C_FP, with C_FP fixed to a unit value and
+#   C_FN = cost_ratio * unit. All costs are illustrative scenario scores in
+#   "units of one false positive" — NOT dollars, NOT financial impact.
+#
+# MODEL REGISTRY (authorization section 14):
+#   Model A (anchor)   = FR25_T0_anchor_cycle   (Phase 2 authoritative H30)
+#   Model B (temporal) = FR25_T4_combined_cyc   (Phase 2.5 combined W5 temporal)
+#   A matched cycle-aware anchor exists ONLY at H30; H14/H50 provide temporal-
+#   model robustness evidence only (retraining a matched anchor is disallowed).
+
+phase: 2.6
+primary_dataset: FD004
+
+paths:
+  experiments_dir: results/experiments/phase2_5      # READ-ONLY inputs
+  processed_dir: data/processed                        # FD004_val.parquet (raw RUL)
+  decisions_dir: results/decisions/phase2_6            # WRITE outputs (separate)
+  figures_dir: results/figures/phase_2_6
+  report_path: reports/PHASE_2_6_DECISION_COST_VALIDATION.md
+
+# Analysis is registered SEPARATELY from predictive experiments (section 19).
+cost_assumptions:
+  label: "illustrative / scenario assumption, not observed real-world financial data."
+  framework: "Expected Cost = FN * C_FN + FP * C_FP"
+  fp_unit_cost: 1.0          # C_FP, in arbitrary unit; C_FN = ratio * this
+  cost_ratios: [1, 2, 5, 10, 20, 50, 100]   # C_FN / C_FP sensitivity grid
+
+thresholds: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+models:
+  anchor_fr_H30: FR25_T0_anchor_cycle
+  temporal_fr_H30: FR25_T4_combined_cyc
+  temporal_fr_H14: FR25_T4_combined_cyc_H14   # sensitivity (temporal-only)
+  temporal_fr_H50: FR25_T4_combined_cyc_H50   # sensitivity (temporal-only)
+  anchor_rul: RUL25_T0_anchor_cycle
+  temporal_rul: RUL25_T4_combined_cyc
+
+horizons:
+  primary: 30
+  sensitivity: [14, 50]
+
+engine_analysis:
+  threshold: 0.5              # operating threshold for engine/fatigue analysis
+  end_of_life_rul: 10         # rows with raw_RUL <= this are "end-of-life"
+
+bootstrap:
+  enabled: true
+  level: engine               # resample the 50 validation engines, not rows
+  n_resamples: 2000
+  seed: 42
+  threshold: 0.5              # engine FN/FP counts fixed at this threshold
+
+hard_rules:
+  no_deep_learning: true
+  official_test_untouched: true
+  no_retraining: true
+  illustrative_costs_only: true

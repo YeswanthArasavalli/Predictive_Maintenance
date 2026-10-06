@@ -1,0 +1,174 @@
+{
+  "experiment_id": "RUL_linear_degradation",
+  "task": "A_RUL",
+  "model": "linear_degradation",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": false,
+  "horizon": null,
+  "hyperparameters": {
+    "hi_sensors": [
+      "sensor_14",
+      "sensor_17",
+      "sensor_11"
+    ],
+    "min_history": 15,
+    "slope_floor": 1e-06
+  },
+  "random_seed": 42,
+  "description": "Causal per-engine OLS trend on a regime-normalized health index built from sensors {14, 17, 11}. Uses observations up to prediction cycle t only, never the future trajectory. Failure threshold is the median HI at last observed cycle across TRAIN engines (train-only constant learned at fit time).",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "model_state": {
+    "direction": 1.0,
+    "median_hi_first": -0.48607736204020774,
+    "median_hi_last": 2.274197572915209,
+    "failure_threshold": 2.274197572915209,
+    "fallback_rul": 133.26718976685262,
+    "rul_cap": 542.0,
+    "n_train_engines": 199
+  },
+  "metrics": {
+    "mae": 323.7670713809207,
+    "rmse": 351.58566324218583,
+    "r2": -14.739640395063045,
+    "prognostic_score_rows": 2.600544443937079e+24,
+    "prognostic_score_last_per_engine": 1.6824235464986082e+16
+  },
+  "summary_metrics_flat": {
+    "mae": 323.7670713809207,
+    "rmse": 351.58566324218583,
+    "r2": -14.739640395063045,
+    "prognostic_score_rows": 2.600544443937079e+24,
+    "prognostic_score_last_per_engine": 1.6824235464986082e+16
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 115,
+      "cycle": 108,
+      "operating_regime": 5,
+      "y_true": 23,
+      "y_pred": 542.0,
+      "error": 519.0,
+      "abs_error": 519.0
+    },
+    {
+      "unit_id": 115,
+      "cycle": 107,
+      "operating_regime": 2,
+      "y_true": 24,
+      "y_pred": 542.0,
+      "error": 518.0,
+      "abs_error": 518.0
+    },
+    {
+      "unit_id": 115,
+      "cycle": 106,
+      "operating_regime": 5,
+      "y_true": 25,
+      "y_pred": 542.0,
+      "error": 517.0,
+      "abs_error": 517.0
+    },
+    {
+      "unit_id": 73,
+      "cycle": 156,
+      "operating_regime": 2,
+      "y_true": 25,
+      "y_pred": 542.0,
+      "error": 517.0,
+      "abs_error": 517.0
+    },
+    {
+      "unit_id": 73,
+      "cycle": 155,
+      "operating_regime": 2,
+      "y_true": 26,
+      "y_pred": 542.0,
+      "error": 516.0,
+      "abs_error": 516.0
+    },
+    {
+      "unit_id": 115,
+      "cycle": 105,
+      "operating_regime": 0,
+      "y_true": 26,
+      "y_pred": 542.0,
+      "error": 516.0,
+      "abs_error": 516.0
+    },
+    {
+      "unit_id": 115,
+      "cycle": 104,
+      "operating_regime": 5,
+      "y_true": 27,
+      "y_pred": 542.0,
+      "error": 515.0,
+      "abs_error": 515.0
+    },
+    {
+      "unit_id": 73,
+      "cycle": 154,
+      "operating_regime": 3,
+      "y_true": 27,
+      "y_pred": 542.0,
+      "error": 515.0,
+      "abs_error": 515.0
+    },
+    {
+      "unit_id": 73,
+      "cycle": 153,
+      "operating_regime": 5,
+      "y_true": 28,
+      "y_pred": 542.0,
+      "error": 514.0,
+      "abs_error": 514.0
+    },
+    {
+      "unit_id": 115,
+      "cycle": 103,
+      "operating_regime": 5,
+      "y_true": 28,
+      "y_pred": 542.0,
+      "error": 514.0,
+      "abs_error": 514.0
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.45176250000076834,
+    "fit_predict_seconds": 0.016680799999448936
+  },
+  "executed_utc": "2026-10-05T18:13:10.393689+00:00"
+}

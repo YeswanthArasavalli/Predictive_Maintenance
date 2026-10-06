@@ -1,0 +1,12 @@
+{
+  "phase": 2.5,
+  "n_experiments": 19,
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "rul_csv": "results\\experiments\\phase2_5\\rul_comparison.csv",
+  "failure_risk_csv": "results\\experiments\\phase2_5\\failure_risk_comparison.csv",
+  "completed_utc": "2026-10-06T05:42:54.469546+00:00"
+}

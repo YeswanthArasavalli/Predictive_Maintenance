@@ -1,0 +1,495 @@
+{
+  "schema_version": "1.1",
+  "phase": 2.5,
+  "primary_dataset": "FD004",
+  "hard_rules": {
+    "no_deep_learning": true,
+    "official_test_untouched": true,
+    "uses_phase1_engine_split_verbatim": true,
+    "temporal_features_causal": true
+  },
+  "temporal_policy": {
+    "enabled": true,
+    "families": [
+      "combined",
+      "lag_diff",
+      "none",
+      "rolling",
+      "slope"
+    ],
+    "causality": "every temporal feature uses only same-engine observations at cycle <= t",
+    "selection": "monitor sensors ranked on TRAIN-only within-engine drift",
+    "early_cycle_policy": "expanding window; std/slope need >=2 obs else 0; diff/delta fill 0"
+  },
+  "phase1_split_reference": {
+    "manifest_path": "results\\audits\\phase1_dataset_manifest.json",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150",
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "n_train_engines": 199,
+    "n_val_engines": 50
+  },
+  "defaults": {
+    "random_seed": 42,
+    "failure_horizon_primary": 30,
+    "failure_horizon_sensitivity": [
+      14,
+      50
+    ]
+  },
+  "experiments": [
+    {
+      "experiment_id": "RUL25_T0_current",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Level 1: current-row features only, no cycle, no temporal.",
+      "temporal_family": "none",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T0_anchor_cycle",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Level 2 / Phase 2 anchor: current features + cycle, no temporal.",
+      "temporal_family": "none",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T1_lagdiff_cyc",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "RUL-T1: current + cycle + causal lag/difference features.",
+      "temporal_family": "lag_diff",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T2_rolling_cyc",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "RUL-T2: current + cycle + causal rolling statistics.",
+      "temporal_family": "rolling",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T3_slope_cyc",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "RUL-T3: current + cycle + causal slope/trend features.",
+      "temporal_family": "slope",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T4_combined_cyc",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "RUL-T4: current + cycle + combined causal temporal features.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T4_combined_nocyc",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "RUL-T4-blind: combined causal temporal features WITHOUT cycle.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T4_combined_cyc_W3",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Temporal-window ablation (short W=3): combined features + cycle.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        3
+      ],
+      "temporal_lags": [
+        3
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "RUL25_T4_combined_cyc_W10",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Temporal-window ablation (medium W=10): combined features + cycle.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        10
+      ],
+      "temporal_lags": [
+        10
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T0_current",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Level 1: current-row features only, no cycle, no temporal.",
+      "temporal_family": "none",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T0_anchor_cycle",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Level 2 / Phase 2 anchor: current features + cycle, no temporal.",
+      "temporal_family": "none",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T1_lagdiff_cyc",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "FR-T1: current + cycle + causal lag/difference features.",
+      "temporal_family": "lag_diff",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T2_rolling_cyc",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "FR-T2: current + cycle + causal rolling statistics.",
+      "temporal_family": "rolling",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T3_slope_cyc",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "FR-T3: current + cycle + causal slope/trend features.",
+      "temporal_family": "slope",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T4_combined_cyc",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "FR-T4: current + cycle + combined causal temporal features.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T4_combined_nocyc",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "FR-T4-blind: combined causal temporal features WITHOUT cycle.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T4_combined_cyc_W10",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Temporal-window ablation (medium W=10) for failure risk.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        10
+      ],
+      "temporal_lags": [
+        10
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T4_combined_cyc_H14",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 14,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Horizon sensitivity: combined temporal features at H=14.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    },
+    {
+      "experiment_id": "FR25_T4_combined_cyc_H50",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 50,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Horizon sensitivity: combined temporal features at H=50.",
+      "temporal_family": "combined",
+      "temporal_windows": [
+        5
+      ],
+      "temporal_lags": [
+        5
+      ],
+      "temporal_n_monitors": 8,
+      "temporal_include_range": false
+    }
+  ],
+  "environment": {
+    "python_version": "3.14.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "git_commit": null,
+    "created_utc": "2026-10-06T05:41:08.095061+00:00"
+  }
+}

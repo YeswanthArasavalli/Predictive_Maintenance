@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "phase": 2.6,
+  "primary_dataset": "FD004",
+  "purpose": "Decision & cost-sensitive validation (NOT a new model phase).",
+  "hard_rules": {
+    "no_deep_learning": true,
+    "official_test_untouched": true,
+    "no_retraining": true,
+    "illustrative_costs_only": true
+  },
+  "cost_assumptions": {
+    "label": "illustrative / scenario assumption, not observed real-world financial data.",
+    "framework": "Expected Cost = FN * C_FN + FP * C_FP",
+    "fp_unit_cost": 1.0,
+    "cost_ratios": [
+      1,
+      2,
+      5,
+      10,
+      20,
+      50,
+      100
+    ]
+  },
+  "illustrative_cost_label": "illustrative / scenario assumption, not observed real-world financial data.",
+  "inputs_read_only": {
+    "prediction_artifacts_dir": "results/experiments/phase2_5",
+    "raw_rul_source": "data/processed/FD004_val.parquet",
+    "val_hash_note": "validation partition only; official test never read"
+  },
+  "models_evaluated": {
+    "anchor_fr_H30": "FR25_T0_anchor_cycle",
+    "temporal_fr_H30": "FR25_T4_combined_cyc",
+    "temporal_fr_H14": "FR25_T4_combined_cyc_H14",
+    "temporal_fr_H50": "FR25_T4_combined_cyc_H50",
+    "anchor_rul": "RUL25_T0_anchor_cycle",
+    "temporal_rul": "RUL25_T4_combined_cyc"
+  },
+  "thresholds": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "cost_ratios": [
+    1.0,
+    2.0,
+    5.0,
+    10.0,
+    20.0,
+    50.0,
+    100.0
+  ],
+  "engine_aggregation_method": "per-engine confusion + positive-run counts at threshold 0.5; bootstrap resamples the 50 validation engines (rows within an engine are correlated and are NOT treated as independent events)",
+  "bootstrap": {
+    "enabled": true,
+    "level": "engine",
+    "n_resamples": 2000,
+    "seed": 42,
+    "threshold": 0.5
+  },
+  "analyses": [
+    {
+      "analysis_id": "threshold_cost",
+      "artifact": "threshold_cost.csv",
+      "horizons": [
+        14,
+        30,
+        50
+      ],
+      "models": [
+        "FR25_T0_anchor_cycle",
+        "FR25_T4_combined_cyc",
+        "FR25_T4_combined_cyc_H14",
+        "FR25_T4_combined_cyc_H50"
+      ]
+    },
+    {
+      "analysis_id": "cost_ratio_sensitivity",
+      "artifact": "cost_ratio_sensitivity.csv"
+    },
+    {
+      "analysis_id": "decision_cost_comparison",
+      "artifact": "decision_cost_comparison.csv",
+      "primary_horizon": 30,
+      "anchor": "FR25_T0_anchor_cycle",
+      "temporal": "FR25_T4_combined_cyc"
+    },
+    {
+      "analysis_id": "engine_level",
+      "artifact": "engine_level_analysis.csv",
+      "threshold": 0.5
+    },
+    {
+      "analysis_id": "alert_fatigue",
+      "artifact": "alert_fatigue.json"
+    },
+    {
+      "analysis_id": "false_negative",
+      "artifact": "false_negative_analysis.json"
+    },
+    {
+      "analysis_id": "rul_decision",
+      "artifact": "rul_decision_analysis.json"
+    },
+    {
+      "analysis_id": "bootstrap",
+      "artifact": "bootstrap.csv",
+      "seed": 42,
+      "n_resamples": 2000
+    }
+  ],
+  "created_utc": "2026-10-06T06:53:52.416017+00:00"
+}

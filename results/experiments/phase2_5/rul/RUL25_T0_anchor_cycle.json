@@ -1,0 +1,178 @@
+{
+  "experiment_id": "RUL25_T0_anchor_cycle",
+  "phase": 2.5,
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": true,
+  "horizon": null,
+  "temporal_family": "none",
+  "temporal_windows": [
+    5
+  ],
+  "temporal_lags": [
+    5
+  ],
+  "temporal_n_monitors": 8,
+  "temporal_metadata": null,
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "Level 2 / Phase 2 anchor: current features + cycle, no temporal.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21",
+    "cycle"
+  ],
+  "n_features": 25,
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 25,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 32.00835944502761,
+    "rmse": 43.24654277137821,
+    "r2": 0.7618583927381586,
+    "prognostic_score_rows": 145180875.83272514,
+    "prognostic_score_last_per_engine": 58.99453472026202
+  },
+  "summary_metrics_flat": {
+    "mae": 32.00835944502761,
+    "rmse": 43.24654277137821,
+    "r2": 0.7618583927381586,
+    "prognostic_score_rows": 145180875.83272514,
+    "prognostic_score_last_per_engine": 58.99453472026202
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 224.6948197629762,
+      "error": -171.3051802370238,
+      "abs_error": 171.3051802370238
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 222.6008106159118,
+      "error": -170.3991893840882,
+      "abs_error": 170.3991893840882
+    },
+    {
+      "unit_id": 50,
+      "cycle": 86,
+      "operating_regime": 0,
+      "y_true": 86,
+      "y_pred": 254.24200205122483,
+      "error": 168.24200205122483,
+      "abs_error": 168.24200205122483
+    },
+    {
+      "unit_id": 171,
+      "cycle": 11,
+      "operating_regime": 4,
+      "y_true": 388,
+      "y_pred": 220.20478976622118,
+      "error": -167.79521023377882,
+      "abs_error": 167.79521023377882
+    },
+    {
+      "unit_id": 50,
+      "cycle": 74,
+      "operating_regime": 4,
+      "y_true": 98,
+      "y_pred": 263.3282532801269,
+      "error": 165.3282532801269,
+      "abs_error": 165.3282532801269
+    },
+    {
+      "unit_id": 50,
+      "cycle": 70,
+      "operating_regime": 2,
+      "y_true": 102,
+      "y_pred": 263.8212407624342,
+      "error": 161.82124076243417,
+      "abs_error": 161.82124076243417
+    },
+    {
+      "unit_id": 50,
+      "cycle": 75,
+      "operating_regime": 0,
+      "y_true": 97,
+      "y_pred": 258.60773704376027,
+      "error": 161.60773704376027,
+      "abs_error": 161.60773704376027
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 236.720761701563,
+      "error": -161.279238298437,
+      "abs_error": 161.279238298437
+    },
+    {
+      "unit_id": 171,
+      "cycle": 52,
+      "operating_regime": 5,
+      "y_true": 347,
+      "y_pred": 186.62359598076827,
+      "error": -160.37640401923173,
+      "abs_error": 160.37640401923173
+    },
+    {
+      "unit_id": 171,
+      "cycle": 111,
+      "operating_regime": 5,
+      "y_true": 288,
+      "y_pred": 127.70344193040197,
+      "error": -160.29655806959803,
+      "abs_error": 160.29655806959803
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.4448514999985491,
+    "fit_predict_seconds": 0.3082310999998299
+  },
+  "executed_utc": "2026-10-06T05:41:09.718884+00:00"
+}

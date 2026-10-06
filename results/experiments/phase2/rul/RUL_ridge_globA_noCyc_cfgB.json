@@ -1,0 +1,162 @@
+{
+  "experiment_id": "RUL_ridge_globA_noCyc_cfgB",
+  "task": "A_RUL",
+  "model": "ridge",
+  "feature_config": "B",
+  "normalization_mode": "A",
+  "include_cycle": false,
+  "horizon": null,
+  "hyperparameters": {
+    "alpha": 1.0
+  },
+  "random_seed": 42,
+  "description": "Sensor ablation: Ridge, Config B (duplicates removed), Global norm.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "model_state": {
+    "alpha": 1.0,
+    "n_features": 21,
+    "coef_mean_abs": 218.79474979490863,
+    "intercept": 133.2671897668539
+  },
+  "metrics": {
+    "mae": 44.887411334103696,
+    "rmse": 55.93189851747283,
+    "r2": 0.6016621150516493,
+    "prognostic_score_rows": 1746803515.9695714,
+    "prognostic_score_last_per_engine": 10313.769913575523
+  },
+  "summary_metrics_flat": {
+    "mae": 44.887411334103696,
+    "rmse": 55.93189851747283,
+    "r2": 0.6016621150516493,
+    "prognostic_score_rows": 1746803515.9695714,
+    "prognostic_score_last_per_engine": 10313.769913575523
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 138.05788734883362,
+      "error": -257.9421126511664,
+      "abs_error": 257.9421126511664
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 145.0144644851049,
+      "error": -252.9855355148951,
+      "abs_error": 252.9855355148951
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 145.44025482714986,
+      "error": -247.55974517285014,
+      "abs_error": 247.55974517285014
+    },
+    {
+      "unit_id": 171,
+      "cycle": 4,
+      "operating_regime": 0,
+      "y_true": 395,
+      "y_pred": 152.3556784149543,
+      "error": -242.6443215850457,
+      "abs_error": 242.6443215850457
+    },
+    {
+      "unit_id": 171,
+      "cycle": 41,
+      "operating_regime": 0,
+      "y_true": 358,
+      "y_pred": 126.70541528656022,
+      "error": -231.29458471343978,
+      "abs_error": 231.29458471343978
+    },
+    {
+      "unit_id": 171,
+      "cycle": 12,
+      "operating_regime": 3,
+      "y_true": 387,
+      "y_pred": 156.48102866572708,
+      "error": -230.51897133427292,
+      "abs_error": 230.51897133427292
+    },
+    {
+      "unit_id": 171,
+      "cycle": 7,
+      "operating_regime": 5,
+      "y_true": 392,
+      "y_pred": 162.5001860906831,
+      "error": -229.4998139093169,
+      "abs_error": 229.4998139093169
+    },
+    {
+      "unit_id": 171,
+      "cycle": 2,
+      "operating_regime": 1,
+      "y_true": 397,
+      "y_pred": 169.72389828490742,
+      "error": -227.27610171509258,
+      "abs_error": 227.27610171509258
+    },
+    {
+      "unit_id": 171,
+      "cycle": 24,
+      "operating_regime": 4,
+      "y_true": 375,
+      "y_pred": 148.0442121217149,
+      "error": -226.9557878782851,
+      "abs_error": 226.9557878782851
+    },
+    {
+      "unit_id": 171,
+      "cycle": 19,
+      "operating_regime": 1,
+      "y_true": 380,
+      "y_pred": 153.975918724316,
+      "error": -226.024081275684,
+      "abs_error": 226.024081275684
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.46839689999615075,
+    "fit_predict_seconds": 0.01989789999788627
+  },
+  "executed_utc": "2026-10-05T18:13:12.169552+00:00"
+}

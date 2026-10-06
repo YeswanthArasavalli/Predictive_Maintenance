@@ -1,0 +1,233 @@
+{
+  "experiment_id": "RUL25_T2_rolling_cyc",
+  "phase": 2.5,
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": true,
+  "horizon": null,
+  "temporal_family": "rolling",
+  "temporal_windows": [
+    5
+  ],
+  "temporal_lags": [
+    5
+  ],
+  "temporal_n_monitors": 8,
+  "temporal_metadata": {
+    "family": "rolling",
+    "windows": [
+      5
+    ],
+    "lags": [
+      5
+    ],
+    "include_range": false,
+    "n_monitors_requested": 8,
+    "monitors_selected_train_only": [
+      "sensor_11",
+      "sensor_15",
+      "sensor_04",
+      "sensor_14",
+      "sensor_09",
+      "sensor_17",
+      "sensor_03",
+      "sensor_12"
+    ],
+    "temporal_feature_names": [
+      "sensor_11__rmean5",
+      "sensor_11__rstd5",
+      "sensor_15__rmean5",
+      "sensor_15__rstd5",
+      "sensor_04__rmean5",
+      "sensor_04__rstd5",
+      "sensor_14__rmean5",
+      "sensor_14__rstd5",
+      "sensor_09__rmean5",
+      "sensor_09__rstd5",
+      "sensor_17__rmean5",
+      "sensor_17__rstd5",
+      "sensor_03__rmean5",
+      "sensor_03__rstd5",
+      "sensor_12__rmean5",
+      "sensor_12__rstd5"
+    ],
+    "n_temporal_features": 16
+  },
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "RUL-T2: current + cycle + causal rolling statistics.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21",
+    "cycle",
+    "sensor_11__rmean5",
+    "sensor_11__rstd5",
+    "sensor_15__rmean5",
+    "sensor_15__rstd5",
+    "sensor_04__rmean5",
+    "sensor_04__rstd5",
+    "sensor_14__rmean5",
+    "sensor_14__rstd5",
+    "sensor_09__rmean5",
+    "sensor_09__rstd5",
+    "sensor_17__rmean5",
+    "sensor_17__rstd5",
+    "sensor_03__rmean5",
+    "sensor_03__rstd5",
+    "sensor_12__rmean5",
+    "sensor_12__rstd5"
+  ],
+  "n_features": 41,
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 41,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 32.14848922478893,
+    "rmse": 44.593061896627724,
+    "r2": 0.746798031469408,
+    "prognostic_score_rows": 413620232.46788836,
+    "prognostic_score_last_per_engine": 44.08263633686667
+  },
+  "summary_metrics_flat": {
+    "mae": 32.14848922478893,
+    "rmse": 44.593061896627724,
+    "r2": 0.746798031469408,
+    "prognostic_score_rows": 413620232.46788836,
+    "prognostic_score_last_per_engine": 44.08263633686667
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 5,
+      "operating_regime": 2,
+      "y_true": 394,
+      "y_pred": 214.5140109049426,
+      "error": -179.4859890950574,
+      "abs_error": 179.4859890950574
+    },
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 217.88252393236263,
+      "error": -178.11747606763737,
+      "abs_error": 178.11747606763737
+    },
+    {
+      "unit_id": 171,
+      "cycle": 4,
+      "operating_regime": 0,
+      "y_true": 395,
+      "y_pred": 217.7056392342793,
+      "error": -177.2943607657207,
+      "abs_error": 177.2943607657207
+    },
+    {
+      "unit_id": 50,
+      "cycle": 82,
+      "operating_regime": 4,
+      "y_true": 90,
+      "y_pred": 266.3079151372728,
+      "error": 176.3079151372728,
+      "abs_error": 176.3079151372728
+    },
+    {
+      "unit_id": 50,
+      "cycle": 94,
+      "operating_regime": 5,
+      "y_true": 78,
+      "y_pred": 253.17000629628808,
+      "error": 175.17000629628808,
+      "abs_error": 175.17000629628808
+    },
+    {
+      "unit_id": 50,
+      "cycle": 90,
+      "operating_regime": 3,
+      "y_true": 82,
+      "y_pred": 256.7687719307638,
+      "error": 174.76877193076382,
+      "abs_error": 174.76877193076382
+    },
+    {
+      "unit_id": 171,
+      "cycle": 65,
+      "operating_regime": 5,
+      "y_true": 334,
+      "y_pred": 160.04164044665686,
+      "error": -173.95835955334314,
+      "abs_error": 173.95835955334314
+    },
+    {
+      "unit_id": 50,
+      "cycle": 86,
+      "operating_regime": 0,
+      "y_true": 86,
+      "y_pred": 256.60255245914396,
+      "error": 170.60255245914396,
+      "abs_error": 170.60255245914396
+    },
+    {
+      "unit_id": 50,
+      "cycle": 76,
+      "operating_regime": 3,
+      "y_true": 96,
+      "y_pred": 265.83699377767056,
+      "error": 169.83699377767056,
+      "abs_error": 169.83699377767056
+    },
+    {
+      "unit_id": 50,
+      "cycle": 91,
+      "operating_regime": 0,
+      "y_true": 81,
+      "y_pred": 250.07566283639298,
+      "error": 169.07566283639298,
+      "abs_error": 169.07566283639298
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 1.870620500001678,
+    "fit_predict_seconds": 0.7880499000002601
+  },
+  "executed_utc": "2026-10-06T05:41:15.176745+00:00"
+}

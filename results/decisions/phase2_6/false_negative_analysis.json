@@ -1,0 +1,39 @@
+{
+  "threshold": 0.5,
+  "models": {
+    "FR25_T0_anchor_cycle": {
+      "false_negatives": {
+        "threshold": 0.5,
+        "n_fn_rows": 62,
+        "n_engines_with_fn": 27,
+        "raw_rul_min": 14.0,
+        "raw_rul_max": 30.0,
+        "raw_rul_mean": 26.725806451612904,
+        "raw_rul_median": 28.0,
+        "raw_rul_p90": 30.0
+      },
+      "false_positives": {
+        "n_fp_rows": 369,
+        "fp_rate_of_negatives": 0.034293680297397766,
+        "n_engines_with_fp": 47
+      }
+    },
+    "FR25_T4_combined_cyc": {
+      "false_negatives": {
+        "threshold": 0.5,
+        "n_fn_rows": 72,
+        "n_engines_with_fn": 25,
+        "raw_rul_min": 18.0,
+        "raw_rul_max": 30.0,
+        "raw_rul_mean": 27.48611111111111,
+        "raw_rul_median": 28.0,
+        "raw_rul_p90": 30.0
+      },
+      "false_positives": {
+        "n_fp_rows": 265,
+        "fp_rate_of_negatives": 0.02462825278810409,
+        "n_engines_with_fp": 38
+      }
+    }
+  }
+}

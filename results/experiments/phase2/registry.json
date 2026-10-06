@@ -1,0 +1,387 @@
+{
+  "schema_version": "1.0",
+  "phase": 2,
+  "primary_dataset": "FD004",
+  "hard_rules": {
+    "no_deep_learning": true,
+    "official_test_untouched": true,
+    "uses_phase1_engine_split_verbatim": true
+  },
+  "phase1_split_reference": {
+    "manifest_path": "results\\audits\\phase1_dataset_manifest.json",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150",
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "n_train_engines": 199,
+    "n_val_engines": 50
+  },
+  "defaults": {
+    "random_seed": 42,
+    "failure_horizon_primary": 30,
+    "failure_horizon_sensitivity": [
+      14,
+      50
+    ]
+  },
+  "experiments": [
+    {
+      "experiment_id": "RUL_naive_mean",
+      "task": "A_RUL",
+      "model": "naive_mean",
+      "feature_config": null,
+      "normalization_mode": null,
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {},
+      "description": "Constant prediction equal to training-set mean raw_RUL."
+    },
+    {
+      "experiment_id": "RUL_naive_age",
+      "task": "A_RUL",
+      "model": "naive_age",
+      "feature_config": null,
+      "normalization_mode": null,
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {},
+      "description": "Predict (mean_train_lifespan - current_cycle), floored at 0."
+    },
+    {
+      "experiment_id": "RUL_linear_degradation",
+      "task": "A_RUL",
+      "model": "linear_degradation",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "hi_sensors": [
+          "sensor_14",
+          "sensor_17",
+          "sensor_11"
+        ],
+        "min_history": 15,
+        "slope_floor": 1e-06
+      },
+      "description": "Causal per-engine OLS trend on a regime-normalized health index built from sensors {14, 17, 11}. Uses observations up to prediction cycle t only, never the future trajectory. Failure threshold is the median HI at last observed cycle across TRAIN engines (train-only constant learned at fit time)."
+    },
+    {
+      "experiment_id": "RUL_ridge_globA_noCyc_cfgA",
+      "task": "A_RUL",
+      "model": "ridge",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "description": "Ridge, Config A, Global normalization, no cycle."
+    },
+    {
+      "experiment_id": "RUL_ridge_globA_withCyc_cfgA",
+      "task": "A_RUL",
+      "model": "ridge",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "description": "Cycle ablation: Ridge, Config A, Global normalization, WITH cycle."
+    },
+    {
+      "experiment_id": "RUL_ridge_regimeB_noCyc_cfgA",
+      "task": "A_RUL",
+      "model": "ridge",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "description": "Normalization ablation: Ridge, Config A, Regime-conditioned normalization."
+    },
+    {
+      "experiment_id": "RUL_ridge_globA_noCyc_cfgB",
+      "task": "A_RUL",
+      "model": "ridge",
+      "feature_config": "B",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "description": "Sensor ablation: Ridge, Config B (duplicates removed), Global norm."
+    },
+    {
+      "experiment_id": "RUL_ridge_globA_noCyc_cfgBplus",
+      "task": "A_RUL",
+      "model": "ridge",
+      "feature_config": "B+",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "alpha": 1.0
+      },
+      "description": "Sensor ablation: Ridge, Config B+ (also drops sensor_16)."
+    },
+    {
+      "experiment_id": "RUL_gb_globA_noCyc_cfgA",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Tree-scaling check: HistGB Regressor on globally normalized features."
+    },
+    {
+      "experiment_id": "RUL_gb_regimeB_noCyc_cfgA",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "HistGB Regressor on regime-conditioned features."
+    },
+    {
+      "experiment_id": "RUL_gb_regimeB_withCyc_cfgA",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "HistGB Regressor, regime normalization, WITH cycle (strongest classical baseline)."
+    },
+    {
+      "experiment_id": "RUL_gb_regimeB_noCyc_cfgBplus",
+      "task": "A_RUL",
+      "model": "hist_gb_regressor",
+      "feature_config": "B+",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": null,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1
+      },
+      "description": "Sensor ablation on the GB path."
+    },
+    {
+      "experiment_id": "FR_majority_H30",
+      "task": "B_FAILURE_RISK",
+      "model": "majority_class",
+      "feature_config": null,
+      "normalization_mode": null,
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {},
+      "description": "Always predicts the majority class observed in training."
+    },
+    {
+      "experiment_id": "FR_logreg_globA_noCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "LogReg, Config A, Global norm, no cycle."
+    },
+    {
+      "experiment_id": "FR_logreg_globA_withCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Cycle ablation on LogReg."
+    },
+    {
+      "experiment_id": "FR_logreg_regimeB_noCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Normalization ablation: LogReg, Config A, Regime-conditioned norm."
+    },
+    {
+      "experiment_id": "FR_logreg_regimeB_noCyc_cfgB",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "B",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Sensor ablation: LogReg, Config B."
+    },
+    {
+      "experiment_id": "FR_logreg_regimeB_noCyc_cfgBplus",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "B+",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Sensor ablation: LogReg, Config B+."
+    },
+    {
+      "experiment_id": "FR_gb_globA_noCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "A",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "HistGB Classifier, Config A, Global norm, class_weight=balanced."
+    },
+    {
+      "experiment_id": "FR_gb_regimeB_noCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "HistGB Classifier, Config A, Regime norm, class_weight=balanced."
+    },
+    {
+      "experiment_id": "FR_gb_regimeB_withCyc_cfgA",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": true,
+      "horizon": 30,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "HistGB Classifier WITH cycle (strongest classical baseline for Task B)."
+    },
+    {
+      "experiment_id": "FR_logreg_regimeB_noCyc_cfgA_H14",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 14,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Horizon sensitivity: LogReg at H=14."
+    },
+    {
+      "experiment_id": "FR_logreg_regimeB_noCyc_cfgA_H50",
+      "task": "B_FAILURE_RISK",
+      "model": "logistic_regression",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 50,
+      "hyperparameters": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "description": "Horizon sensitivity: LogReg at H=50."
+    },
+    {
+      "experiment_id": "FR_gb_regimeB_noCyc_cfgA_H14",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 14,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Horizon sensitivity: HistGB at H=14."
+    },
+    {
+      "experiment_id": "FR_gb_regimeB_noCyc_cfgA_H50",
+      "task": "B_FAILURE_RISK",
+      "model": "hist_gb_classifier",
+      "feature_config": "A",
+      "normalization_mode": "B",
+      "include_cycle": false,
+      "horizon": 50,
+      "hyperparameters": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "class_weight": "balanced"
+      },
+      "description": "Horizon sensitivity: HistGB at H=50."
+    }
+  ],
+  "environment": {
+    "python_version": "3.14.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "git_commit": null,
+    "created_utc": "2026-10-05T18:13:09.141285+00:00"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "experiment_id": "RUL_ridge_globA_noCyc_cfgA",
+  "task": "A_RUL",
+  "model": "ridge",
+  "feature_config": "A",
+  "normalization_mode": "A",
+  "include_cycle": false,
+  "horizon": null,
+  "hyperparameters": {
+    "alpha": 1.0
+  },
+  "random_seed": 42,
+  "description": "Ridge, Config A, Global normalization, no cycle.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "model_state": {
+    "alpha": 1.0,
+    "n_features": 24,
+    "coef_mean_abs": 197.82365339117266,
+    "intercept": 133.26718976685345
+  },
+  "metrics": {
+    "mae": 44.872388461918995,
+    "rmse": 55.901824516112875,
+    "r2": 0.6020903641815383,
+    "prognostic_score_rows": 1716752879.316503,
+    "prognostic_score_last_per_engine": 11213.854075379175
+  },
+  "summary_metrics_flat": {
+    "mae": 44.872388461918995,
+    "rmse": 55.901824516112875,
+    "r2": 0.6020903641815383,
+    "prognostic_score_rows": 1716752879.316503,
+    "prognostic_score_last_per_engine": 11213.854075379175
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 138.29033783259044,
+      "error": -257.70966216740953,
+      "abs_error": 257.70966216740953
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 146.2404482157304,
+      "error": -251.7595517842696,
+      "abs_error": 251.7595517842696
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 145.81349948318632,
+      "error": -247.18650051681368,
+      "abs_error": 247.18650051681368
+    },
+    {
+      "unit_id": 171,
+      "cycle": 4,
+      "operating_regime": 0,
+      "y_true": 395,
+      "y_pred": 151.03921736544032,
+      "error": -243.96078263455968,
+      "abs_error": 243.96078263455968
+    },
+    {
+      "unit_id": 171,
+      "cycle": 12,
+      "operating_regime": 3,
+      "y_true": 387,
+      "y_pred": 156.00566996466966,
+      "error": -230.99433003533034,
+      "abs_error": 230.99433003533034
+    },
+    {
+      "unit_id": 171,
+      "cycle": 41,
+      "operating_regime": 0,
+      "y_true": 358,
+      "y_pred": 127.55379604583675,
+      "error": -230.44620395416325,
+      "abs_error": 230.44620395416325
+    },
+    {
+      "unit_id": 171,
+      "cycle": 7,
+      "operating_regime": 5,
+      "y_true": 392,
+      "y_pred": 162.3647825806123,
+      "error": -229.6352174193877,
+      "abs_error": 229.6352174193877
+    },
+    {
+      "unit_id": 171,
+      "cycle": 2,
+      "operating_regime": 1,
+      "y_true": 397,
+      "y_pred": 170.56891498911023,
+      "error": -226.43108501088977,
+      "abs_error": 226.43108501088977
+    },
+    {
+      "unit_id": 171,
+      "cycle": 19,
+      "operating_regime": 1,
+      "y_true": 380,
+      "y_pred": 154.02783927928954,
+      "error": -225.97216072071046,
+      "abs_error": 225.97216072071046
+    },
+    {
+      "unit_id": 171,
+      "cycle": 24,
+      "operating_regime": 4,
+      "y_true": 375,
+      "y_pred": 149.31567969645465,
+      "error": -225.68432030354535,
+      "abs_error": 225.68432030354535
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.3828334999998333,
+    "fit_predict_seconds": 0.020295700000133365
+  },
+  "executed_utc": "2026-10-05T18:13:10.804640+00:00"
+}

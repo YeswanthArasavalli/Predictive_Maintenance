@@ -1,0 +1,9 @@
+{
+  "normalization_mode": "B",
+  "normalization_fit_scope": "train_engines_only",
+  "seed": 42,
+  "lookback_W": 30,
+  "failure_horizon_H": 30,
+  "rul_cap": null,
+  "causal_scaler_note": "Scaler parameters are deployment-known constants learned from the training partition. They are NOT computed from the future trajectory of any single engine being scored."
+}

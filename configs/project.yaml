@@ -1,0 +1,59 @@
+# Project configuration for Predictive Maintenance
+# Read by src/data/loader.py and analysis scripts.
+
+project:
+  name: "predictive-maintenance"
+  version: "0.1.0"
+  primary_dataset: "FD004"
+  ablation_datasets: ["FD001", "FD002", "FD003"]
+
+data:
+  raw_dir: "data/raw/CMAPSSData_v1.0"
+  checksum_file: "data/raw/.checksums.txt"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  source_note: "Supplied file bundle (13 txt files + PDF), unmodified copy."
+
+schema:
+  unit_id: "unit_id"
+  cycle: "cycle"
+  operational_settings: ["operational_setting_1", "operational_setting_2", "operational_setting_3"]
+  sensors: "sensor_{:02d}"  # 01..21
+  n_sensors: 21
+  n_columns: 26  # 2 keys + 3 settings + 21 sensors
+  # readme.txt words column 26 as "sensor measurement 26"; the canonical schema
+  # is 21 sensors across columns 6-26 (Phase-0 methodology fixes sensor_01..21).
+  # Columns with trailing whitespace are trimmed; no unnamed columns are retained.
+
+paths:
+  figures_dir: "results/figures/phase_0"
+  tables_dir: "results/tables"
+  audits_dir: "results/audits"
+  reports_dir: "reports"
+  logs_dir: "logs"
+
+random_seed: 42
+engine_seed: 12345
+task:
+  A_RUL:
+    description: "Regression: predict remaining operational cycles to failure."
+    target: "RUL"
+  B_FAILURE_RISK:
+    description: "Binary classification: fail within H future operational cycles."
+    target: "failure_within_H"
+    candidate_horizons: [14, 30, 50]  # in operational cycles, NOT days
+
+validation:
+  strategy: "engine_level_stratified"  # Phase 0 recommendation; see reports
+  notes: "Do not randomly split rows; respect engine independence and temporal order."
+
+phase1:
+  primary_dataset: "FD004"
+  train_fraction: 0.8
+  sensor_config: "A"           # A=all 21 sensors, B=remove duplicates
+  normalization_mode: "B"     # B=regime-conditioned (primary), A=global (ablation)
+  rul_cap: null               # null = no cap (primary); 125 = ablation
+  failure_horizon: 30         # primary, in operational cycles (NOT days)
+  alternative_horizons: [14, 50]
+  lookback_W: 30              # default window size
+  seed: 42

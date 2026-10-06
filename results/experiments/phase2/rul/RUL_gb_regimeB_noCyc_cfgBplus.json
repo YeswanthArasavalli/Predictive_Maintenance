@@ -1,0 +1,162 @@
+{
+  "experiment_id": "RUL_gb_regimeB_noCyc_cfgBplus",
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "B+",
+  "normalization_mode": "B",
+  "include_cycle": false,
+  "horizon": null,
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "Sensor ablation on the GB path.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_17",
+    "sensor_20",
+    "sensor_21"
+  ],
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 20,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 36.74079150811902,
+    "rmse": 50.38499327250914,
+    "r2": 0.6767527038202422,
+    "prognostic_score_rows": 927934335.976771,
+    "prognostic_score_last_per_engine": 84.35616970942529
+  },
+  "summary_metrics_flat": {
+    "mae": 36.74079150811902,
+    "rmse": 50.38499327250914,
+    "r2": 0.6767527038202422,
+    "prognostic_score_rows": 927934335.976771,
+    "prognostic_score_last_per_engine": 84.35616970942529
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 143.9711059983143,
+      "error": -252.0288940016857,
+      "abs_error": 252.0288940016857
+    },
+    {
+      "unit_id": 171,
+      "cycle": 4,
+      "operating_regime": 0,
+      "y_true": 395,
+      "y_pred": 148.07261431945207,
+      "error": -246.92738568054793,
+      "abs_error": 246.92738568054793
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 166.06610989210677,
+      "error": -231.93389010789323,
+      "abs_error": 231.93389010789323
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 172.2931036314696,
+      "error": -220.7068963685304,
+      "abs_error": 220.7068963685304
+    },
+    {
+      "unit_id": 171,
+      "cycle": 17,
+      "operating_regime": 0,
+      "y_true": 382,
+      "y_pred": 161.4902129484338,
+      "error": -220.5097870515662,
+      "abs_error": 220.5097870515662
+    },
+    {
+      "unit_id": 171,
+      "cycle": 16,
+      "operating_regime": 0,
+      "y_true": 383,
+      "y_pred": 165.40618325089588,
+      "error": -217.59381674910412,
+      "abs_error": 217.59381674910412
+    },
+    {
+      "unit_id": 171,
+      "cycle": 8,
+      "operating_regime": 0,
+      "y_true": 391,
+      "y_pred": 174.20002766245068,
+      "error": -216.79997233754932,
+      "abs_error": 216.79997233754932
+    },
+    {
+      "unit_id": 171,
+      "cycle": 11,
+      "operating_regime": 4,
+      "y_true": 388,
+      "y_pred": 174.61717803869303,
+      "error": -213.38282196130697,
+      "abs_error": 213.38282196130697
+    },
+    {
+      "unit_id": 171,
+      "cycle": 24,
+      "operating_regime": 4,
+      "y_true": 375,
+      "y_pred": 167.721569596142,
+      "error": -207.278430403858,
+      "abs_error": 207.278430403858
+    },
+    {
+      "unit_id": 171,
+      "cycle": 22,
+      "operating_regime": 4,
+      "y_true": 377,
+      "y_pred": 170.67822910414617,
+      "error": -206.32177089585383,
+      "abs_error": 206.32177089585383
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.48520380000263685,
+    "fit_predict_seconds": 0.26585329999943497
+  },
+  "executed_utc": "2026-10-05T18:13:15.750666+00:00"
+}

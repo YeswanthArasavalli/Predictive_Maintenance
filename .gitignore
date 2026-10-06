@@ -1,0 +1,60 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Data (never commit raw data; track integrity via checksums)
+data/raw/*
+!data/raw/README.md
+!data/raw/.checksums.txt
+data/interim/
+data/processed/
+# Top-level raw C-MAPSS copy (unreferenced duplicate of data/raw/CMAPSSData_v1.0).
+# Excluded per the raw-data policy: it contains the sealed official test labels
+# (test_FD004.txt / RUL_FD004.txt) and a copyrighted source PDF.
+CMAPSSData/
+results/figures/*
+results/tables/*
+results/audits/
+*.csv
+*.feather
+*.parquet
+*.pkl
+*.pickle
+*.npz
+*.npy
+
+# Logs and checkpoints
+logs/
+*.log
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+*.tmp

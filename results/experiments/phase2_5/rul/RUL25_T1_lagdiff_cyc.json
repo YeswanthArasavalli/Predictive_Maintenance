@@ -1,0 +1,233 @@
+{
+  "experiment_id": "RUL25_T1_lagdiff_cyc",
+  "phase": 2.5,
+  "task": "A_RUL",
+  "model": "hist_gb_regressor",
+  "feature_config": "A",
+  "normalization_mode": "B",
+  "include_cycle": true,
+  "horizon": null,
+  "temporal_family": "lag_diff",
+  "temporal_windows": [
+    5
+  ],
+  "temporal_lags": [
+    5
+  ],
+  "temporal_n_monitors": 8,
+  "temporal_metadata": {
+    "family": "lag_diff",
+    "windows": [
+      5
+    ],
+    "lags": [
+      5
+    ],
+    "include_range": false,
+    "n_monitors_requested": 8,
+    "monitors_selected_train_only": [
+      "sensor_11",
+      "sensor_15",
+      "sensor_04",
+      "sensor_14",
+      "sensor_09",
+      "sensor_17",
+      "sensor_03",
+      "sensor_12"
+    ],
+    "temporal_feature_names": [
+      "sensor_11__d1",
+      "sensor_11__dk5",
+      "sensor_15__d1",
+      "sensor_15__dk5",
+      "sensor_04__d1",
+      "sensor_04__dk5",
+      "sensor_14__d1",
+      "sensor_14__dk5",
+      "sensor_09__d1",
+      "sensor_09__dk5",
+      "sensor_17__d1",
+      "sensor_17__dk5",
+      "sensor_03__d1",
+      "sensor_03__dk5",
+      "sensor_12__d1",
+      "sensor_12__dk5"
+    ],
+    "n_temporal_features": 16
+  },
+  "hyperparameters": {
+    "max_iter": 200,
+    "learning_rate": 0.1
+  },
+  "random_seed": 42,
+  "description": "RUL-T1: current + cycle + causal lag/difference features.",
+  "feature_names": [
+    "operational_setting_1",
+    "operational_setting_2",
+    "operational_setting_3",
+    "sensor_01",
+    "sensor_02",
+    "sensor_03",
+    "sensor_04",
+    "sensor_05",
+    "sensor_06",
+    "sensor_07",
+    "sensor_08",
+    "sensor_09",
+    "sensor_10",
+    "sensor_11",
+    "sensor_12",
+    "sensor_13",
+    "sensor_14",
+    "sensor_15",
+    "sensor_16",
+    "sensor_17",
+    "sensor_18",
+    "sensor_19",
+    "sensor_20",
+    "sensor_21",
+    "cycle",
+    "sensor_11__d1",
+    "sensor_11__dk5",
+    "sensor_15__d1",
+    "sensor_15__dk5",
+    "sensor_04__d1",
+    "sensor_04__dk5",
+    "sensor_14__d1",
+    "sensor_14__dk5",
+    "sensor_09__d1",
+    "sensor_09__dk5",
+    "sensor_17__d1",
+    "sensor_17__dk5",
+    "sensor_03__d1",
+    "sensor_03__dk5",
+    "sensor_12__d1",
+    "sensor_12__dk5"
+  ],
+  "n_features": 41,
+  "model_state": {
+    "max_iter": 200,
+    "learning_rate": 0.1,
+    "n_features": 41,
+    "random_state": 42
+  },
+  "metrics": {
+    "mae": 31.63764491850434,
+    "rmse": 42.93080620543575,
+    "r2": 0.7653229720058372,
+    "prognostic_score_rows": 100104926.1066811,
+    "prognostic_score_last_per_engine": 65.8385664388807
+  },
+  "summary_metrics_flat": {
+    "mae": 31.63764491850434,
+    "rmse": 42.93080620543575,
+    "r2": 0.7653229720058372,
+    "prognostic_score_rows": 100104926.1066811,
+    "prognostic_score_last_per_engine": 65.8385664388807
+  },
+  "class_balance": null,
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": [
+    {
+      "unit_id": 171,
+      "cycle": 11,
+      "operating_regime": 4,
+      "y_true": 388,
+      "y_pred": 221.11818855626288,
+      "error": -166.88181144373712,
+      "abs_error": 166.88181144373712
+    },
+    {
+      "unit_id": 171,
+      "cycle": 1,
+      "operating_regime": 5,
+      "y_true": 398,
+      "y_pred": 231.26474990603754,
+      "error": -166.73525009396246,
+      "abs_error": 166.73525009396246
+    },
+    {
+      "unit_id": 171,
+      "cycle": 52,
+      "operating_regime": 5,
+      "y_true": 347,
+      "y_pred": 185.7630516330419,
+      "error": -161.2369483669581,
+      "abs_error": 161.2369483669581
+    },
+    {
+      "unit_id": 171,
+      "cycle": 3,
+      "operating_regime": 4,
+      "y_true": 396,
+      "y_pred": 235.76206868586058,
+      "error": -160.23793131413942,
+      "abs_error": 160.23793131413942
+    },
+    {
+      "unit_id": 171,
+      "cycle": 80,
+      "operating_regime": 5,
+      "y_true": 319,
+      "y_pred": 159.84222310025766,
+      "error": -159.15777689974234,
+      "abs_error": 159.15777689974234
+    },
+    {
+      "unit_id": 171,
+      "cycle": 6,
+      "operating_regime": 3,
+      "y_true": 393,
+      "y_pred": 234.49999010279498,
+      "error": -158.50000989720502,
+      "abs_error": 158.50000989720502
+    },
+    {
+      "unit_id": 50,
+      "cycle": 41,
+      "operating_regime": 1,
+      "y_true": 131,
+      "y_pred": 289.0310425788955,
+      "error": 158.0310425788955,
+      "abs_error": 158.0310425788955
+    },
+    {
+      "unit_id": 50,
+      "cycle": 91,
+      "operating_regime": 0,
+      "y_true": 81,
+      "y_pred": 238.31855395724833,
+      "error": 157.31855395724833,
+      "abs_error": 157.31855395724833
+    },
+    {
+      "unit_id": 171,
+      "cycle": 19,
+      "operating_regime": 1,
+      "y_true": 380,
+      "y_pred": 223.34817384693932,
+      "error": -156.65182615306068,
+      "abs_error": 156.65182615306068
+    },
+    {
+      "unit_id": 171,
+      "cycle": 64,
+      "operating_regime": 1,
+      "y_true": 335,
+      "y_pred": 179.09101493781927,
+      "error": -155.90898506218073,
+      "abs_error": 155.90898506218073
+    }
+  ],
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 2.168448399999761,
+    "fit_predict_seconds": 0.5947040999999444
+  },
+  "executed_utc": "2026-10-06T05:41:12.499358+00:00"
+}

@@ -1,0 +1,88 @@
+{
+  "experiment_id": "FR_majority_H30",
+  "task": "B_FAILURE_RISK",
+  "model": "majority_class",
+  "feature_config": null,
+  "normalization_mode": null,
+  "include_cycle": false,
+  "horizon": 30,
+  "hyperparameters": {},
+  "random_seed": 42,
+  "description": "Always predicts the majority class observed in training.",
+  "feature_names": [],
+  "model_state": {
+    "majority_label": 0,
+    "positive_rate": 0.12605488465232229
+  },
+  "metrics": {
+    "at_default_threshold": {
+      "accuracy": 0.8740861088545898,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "pr_auc": null,
+      "roc_auc": null,
+      "tp": 0,
+      "fp": 0,
+      "tn": 10760,
+      "fn": 1550,
+      "threshold": 0.5,
+      "notes": [
+        "Deterministic classifier: PR-AUC/ROC-AUC are undefined without probabilities."
+      ]
+    },
+    "at_candidate_threshold": null,
+    "candidate_threshold": null
+  },
+  "summary_metrics_flat": {
+    "accuracy": 0.8740861088545898,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "pr_auc": null,
+    "roc_auc": null,
+    "tp": 0,
+    "fp": 0,
+    "tn": 10760,
+    "fn": 1550,
+    "threshold": 0.5,
+    "notes": [
+      "Deterministic classifier: PR-AUC/ROC-AUC are undefined without probabilities."
+    ]
+  },
+  "class_balance": {
+    "total_rows": 12310,
+    "positive_rows": 1550,
+    "negative_rows": 10760,
+    "positive_rate": 0.12591389114541024,
+    "negative_rate": 0.8740861088545898,
+    "total_engines": 50,
+    "engines_with_any_positive": 50,
+    "engines_all_negative": 0,
+    "positive_engine_ids_sample": [
+      1,
+      6,
+      12,
+      18,
+      22,
+      27,
+      37,
+      40,
+      42,
+      47
+    ]
+  },
+  "candidate_threshold": null,
+  "threshold_sweep": null,
+  "worst10": null,
+  "phase1_reference": {
+    "train_hash": "cb49950e6faacc9100c04f410c92f99585c6baffce4ff11cd9dd1895ddbdb359",
+    "val_hash": "116fa158295678abcbd0c083f62d384d7d67971263fe40b947b1c7590d746042",
+    "manifest_hash": "6b3a8b49092c6ee3360cea07c9d9896cc6386cb2621d4e63995209603058f150"
+  },
+  "timing_seconds": {
+    "prepare_seconds": 0.34651709999889135,
+    "fit_predict_seconds": 0.008836599998176098
+  },
+  "executed_utc": "2026-10-05T18:13:16.116257+00:00"
+}

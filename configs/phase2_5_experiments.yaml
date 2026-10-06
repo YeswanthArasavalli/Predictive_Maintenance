@@ -1,0 +1,307 @@
+# Phase 2.5 — Causal Temporal Feature Baselines Registry
+#
+# SCIENTIFIC QUESTION: does causal trajectory information beyond the current
+# observation + engine age (cycle) materially improve RUL estimation and
+# failure-risk prediction on FD004?
+#
+# This is a strictly NON-NEURAL temporal-feature experiment. The only models
+# used are the already-authorized Phase 2 classical models:
+#   Task A (RUL):         hist_gb_regressor
+#   Task B (FailureRisk): hist_gb_classifier
+# No LSTM / GRU / Transformer / CNN / RNN / neural / pretrained model is
+# defined here (enforced by the model allowlist in src/pipeline/registry.py
+# and re-checked by scripts/verify_phase2_5_gate.py).
+#
+# Data policy (identical to Phase 2, reused verbatim):
+#   - FD004 only. Same 249 engines. Same frozen 199-train / 50-val engine split
+#     loaded from results/audits/phase1_dataset_manifest.json. No re-splitting.
+#   - Same train-only normalization (Mode B regime-conditioned).
+#   - The official test split (test_FD004.txt / RUL_FD004.txt) is NEVER loaded.
+#   - Raw uncapped RUL is the primary regression target. H30 is the primary
+#     failure-risk horizon; H14 and H50 are sensitivity checks.
+#
+# Temporal policy (see src/features/temporal.py):
+#   - Every temporal feature at cycle t uses ONLY the same engine's
+#     observations at cycles <= t. Windows never cross an engine boundary and
+#     never look into the future.
+#   - Monitor sensors are selected on TRAINING rows only (train-only within-
+#     engine drift), never by inspecting validation performance.
+#   - temporal_family: none | lag_diff | rolling | slope | combined
+#
+# NOTE: Phase 2.5 does NOT overwrite or replace any Phase 2 result. The
+# RUL25_/FR25_ anchors below re-establish the Phase 2 recipe as the controlled
+# comparison baseline inside this phase's own registry.
+
+defaults:
+  primary_dataset: FD004
+  manifest_path: results/audits/phase1_dataset_manifest.json
+  processed_dir: data/processed
+  experiments_dir: results/experiments/phase2_5
+  figures_dir: results/figures/phase_2_5
+  random_seed: 42
+  failure_horizon_primary: 30
+  failure_horizon_sensitivity: [14, 50]
+  temporal_default_windows: [5]
+  temporal_default_lags: [5]
+  temporal_n_monitors: 8
+
+experiments:
+  # =================================================================
+  # TASK A — RUL REGRESSION (HistGB regressor, Config A, Mode B)
+  # =================================================================
+  - experiment_id: RUL25_T0_current
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: false
+    horizon: null
+    temporal_family: none
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "Level 1: current-row features only, no cycle, no temporal."
+
+  - experiment_id: RUL25_T0_anchor_cycle
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: none
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "Level 2 / Phase 2 anchor: current features + cycle, no temporal."
+
+  - experiment_id: RUL25_T1_lagdiff_cyc
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: lag_diff
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "RUL-T1: current + cycle + causal lag/difference features."
+
+  - experiment_id: RUL25_T2_rolling_cyc
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: rolling
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "RUL-T2: current + cycle + causal rolling statistics."
+
+  - experiment_id: RUL25_T3_slope_cyc
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: slope
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "RUL-T3: current + cycle + causal slope/trend features."
+
+  - experiment_id: RUL25_T4_combined_cyc
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "RUL-T4: current + cycle + combined causal temporal features."
+
+  - experiment_id: RUL25_T4_combined_nocyc
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: false
+    horizon: null
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "RUL-T4-blind: combined causal temporal features WITHOUT cycle."
+
+  - experiment_id: RUL25_T4_combined_cyc_W3
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: combined
+    temporal_windows: [3]
+    temporal_lags: [3]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "Temporal-window ablation (short W=3): combined features + cycle."
+
+  - experiment_id: RUL25_T4_combined_cyc_W10
+    task: A_RUL
+    model: hist_gb_regressor
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: null
+    temporal_family: combined
+    temporal_windows: [10]
+    temporal_lags: [10]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1 }
+    description: "Temporal-window ablation (medium W=10): combined features + cycle."
+
+  # =================================================================
+  # TASK B — FAILURE RISK (HistGB classifier, Config A, Mode B, H=30 primary)
+  # =================================================================
+  - experiment_id: FR25_T0_current
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: false
+    horizon: 30
+    temporal_family: none
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "Level 1: current-row features only, no cycle, no temporal."
+
+  - experiment_id: FR25_T0_anchor_cycle
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: none
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "Level 2 / Phase 2 anchor: current features + cycle, no temporal."
+
+  - experiment_id: FR25_T1_lagdiff_cyc
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: lag_diff
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "FR-T1: current + cycle + causal lag/difference features."
+
+  - experiment_id: FR25_T2_rolling_cyc
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: rolling
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "FR-T2: current + cycle + causal rolling statistics."
+
+  - experiment_id: FR25_T3_slope_cyc
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: slope
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "FR-T3: current + cycle + causal slope/trend features."
+
+  - experiment_id: FR25_T4_combined_cyc
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "FR-T4: current + cycle + combined causal temporal features."
+
+  - experiment_id: FR25_T4_combined_nocyc
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: false
+    horizon: 30
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "FR-T4-blind: combined causal temporal features WITHOUT cycle."
+
+  - experiment_id: FR25_T4_combined_cyc_W10
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 30
+    temporal_family: combined
+    temporal_windows: [10]
+    temporal_lags: [10]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "Temporal-window ablation (medium W=10) for failure risk."
+
+  - experiment_id: FR25_T4_combined_cyc_H14
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 14
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "Horizon sensitivity: combined temporal features at H=14."
+
+  - experiment_id: FR25_T4_combined_cyc_H50
+    task: B_FAILURE_RISK
+    model: hist_gb_classifier
+    feature_config: A
+    normalization_mode: B
+    include_cycle: true
+    horizon: 50
+    temporal_family: combined
+    temporal_windows: [5]
+    temporal_lags: [5]
+    temporal_n_monitors: 8
+    hyperparameters: { max_iter: 200, learning_rate: 0.1, class_weight: balanced }
+    description: "Horizon sensitivity: combined temporal features at H=50."
