@@ -1,0 +1,30 @@
+{
+  "provenance": "Derived from frozen validation artifacts. No official test partition used.",
+  "generated_from": "results/ (frozen Phase 2.5 / 2.6 validation artifacts)",
+  "n_files": 17,
+  "files": [
+    "README.md",
+    "decision/alert_fatigue.json",
+    "decision/cost_ratio_sensitivity.csv",
+    "decision/decision_cost_comparison.csv",
+    "decision/engine_level_analysis.csv",
+    "decision/false_negative_analysis.json",
+    "decision/rul_decision_analysis.json",
+    "decision/threshold_cost.csv",
+    "fr_anchor_predictions.parquet",
+    "fr_temporal_predictions.parquet",
+    "fr_val_predictions.parquet",
+    "manifest.json",
+    "metrics.json",
+    "overview.json",
+    "rul_anchor_predictions.parquet",
+    "rul_temporal_predictions.parquet",
+    "rul_val_predictions.parquet"
+  ],
+  "sha256": {
+    "rul_val_predictions.parquet": "090fdff2147efcb10866d79ef4625f2928a59596014fbd306c18be742f1f75b4",
+    "fr_val_predictions.parquet": "78bfe44eb676c90c1a4fa0a7138d632ea4f8ae52272f7f4dcba101169e6eaedc"
+  },
+  "n_val_engines": 50,
+  "n_rows": 12310
+}

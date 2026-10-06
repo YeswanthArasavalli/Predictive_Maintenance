@@ -1,0 +1,31 @@
+{
+  "provenance": "Derived from frozen validation artifacts. No official test partition used.",
+  "dataset": "NASA C-MAPSS FD004",
+  "n_train_engines_total": 249,
+  "n_test_engines_official": 248,
+  "n_operating_regimes": 6,
+  "n_fault_modes": 2,
+  "n_train_engines_used": 199,
+  "n_val_engines": 50,
+  "primary_horizon_H": 30,
+  "scientific_python": "3.14.6",
+  "environment_packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "matplotlib": "3.11.2",
+    "yaml": "6.0.3",
+    "pyarrow": "25.0.1",
+    "joblib": "1.6.0",
+    "pytest": "9.1.1"
+  },
+  "seed": 42,
+  "gates": {
+    "phase1": "PASS",
+    "phase2": "PASS",
+    "phase2_5": "PASS",
+    "phase2_6": "PASS"
+  },
+  "scientific_test_count": 147
+}

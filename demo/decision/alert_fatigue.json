@@ -1,0 +1,27 @@
+{
+  "threshold": 0.5,
+  "label": "illustrative / scenario assumption, not observed real-world financial data.",
+  "note": "Descriptive raw-prediction aggregates; NOT a production alert policy.",
+  "anchor": {
+    "n_engines": 50,
+    "total_alert_rows": 1857,
+    "total_false_positive_rows": 369,
+    "total_positive_runs": 204,
+    "total_fp_runs": 128,
+    "mean_positive_runs_per_engine": 4.08,
+    "mean_fp_runs_per_engine": 2.56,
+    "engines_ever_detected": 50,
+    "engines_ever_missed": 27
+  },
+  "temporal": {
+    "n_engines": 50,
+    "total_alert_rows": 1743,
+    "total_false_positive_rows": 265,
+    "total_positive_runs": 112,
+    "total_fp_runs": 43,
+    "mean_positive_runs_per_engine": 2.24,
+    "mean_fp_runs_per_engine": 0.86,
+    "engines_ever_detected": 50,
+    "engines_ever_missed": 25
+  }
+}

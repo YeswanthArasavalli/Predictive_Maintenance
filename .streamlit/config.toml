@@ -1,0 +1,12 @@
+# Minimal Streamlit configuration for the public demo. No secrets.
+[theme]
+base = "light"
+primaryColor = "#1f77b4"
+
+[client]
+toolbarMode = "minimal"
+# Do not surface Python tracebacks / stack details to public visitors.
+showErrorDetails = false
+
+[browser]
+gatherUsageStats = false

@@ -7,6 +7,24 @@ estimates engine Remaining Useful Life and forecasts failure risk over an
 operational-cycle horizon — and that deliberately stops at classical +
 causal-temporal models because the evidence did not justify a neural network.
 
+## Live Demo
+
+A read-only Streamlit portfolio demo exposes the frozen validation artifacts.
+
+```text
+LIVE_DEMO_URL: <TO_BE_FILLED_AFTER_DEPLOYMENT>
+```
+
+> The URL is a placeholder until a real Streamlit Community Cloud deployment
+> exists. Do not insert a fabricated link. Run locally with
+> `python -m streamlit run streamlit_app.py`.
+
+## Recommended portfolio write-up order
+
+1. Problem 2. Dataset 3. Approach 4. Key results 5. Decision analysis
+6. Why no LSTM 7. Live demo 8. GitHub 9. Evidence screenshots
+10. Limitations
+
 ## Problem
 
 - **RUL estimation:** predict remaining operational cycles before failure.

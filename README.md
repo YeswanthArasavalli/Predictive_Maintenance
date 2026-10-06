@@ -15,6 +15,29 @@ supports (no LSTM, because the data did not earn one).**
 
 ---
 
+## Demo
+
+A **read-only Streamlit portfolio demo** presents the frozen validation artifacts
+(nothing is retrained on load). It is a presentation layer over validated outputs —
+**separate from** the research repository itself.
+
+| | |
+|---|---|
+| **Live interactive demo** | `LIVE_DEMO_URL: <TO_BE_FILLED_AFTER_DEPLOYMENT>` |
+| **GitHub repository** | This repository (authoritative research implementation) |
+
+Run it locally:
+
+```powershell
+.venv-app\Scripts\python.exe -m streamlit run streamlit_app.py
+```
+
+The live URL is intentionally a placeholder until a real Streamlit Community Cloud
+deployment exists — it is **not** invented here. See
+[docs/portfolio_evidence.md](docs/portfolio_evidence.md).
+
+---
+
 ## The problem (60 seconds)
 
 Engines (and industrial equipment generally) degrade over time. Predictive
@@ -177,6 +200,8 @@ persistence for inference, monitoring, or online scoring.
 | [docs/architecture.md](docs/architecture.md) | Pipeline layers and boundaries |
 | [docs/reproducibility.md](docs/reproducibility.md) | Tested setup / run commands |
 | [docs/portfolio_summary.md](docs/portfolio_summary.md) | Recruiter-oriented summary |
+| [docs/portfolio_evidence.md](docs/portfolio_evidence.md) | Streamlit demo + screenshot plan |
+| [docs/resume_claims.md](docs/resume_claims.md) | Defensible vs unsupported claims |
 | [docs/release_status.md](docs/release_status.md) | Current vs historical status |
 | [docs/FINAL_RELEASE_REPORT.md](docs/FINAL_RELEASE_REPORT.md) | Release-hardening report |
 

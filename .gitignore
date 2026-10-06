@@ -7,6 +7,7 @@ __pycache__/
 # Virtual environments
 .env
 .venv
+.venv-app/
 env/
 venv/
 
@@ -58,3 +59,12 @@ Thumbs.db
 # Temporary
 tmp/
 *.tmp
+
+# Streamlit public demo bundle: derived, public-safe, committed on purpose.
+# Overrides the global *.csv / *.parquet ignores above for this small bundle only.
+!demo/
+!demo/*.json
+!demo/*.md
+!demo/*.parquet
+!demo/decision/*.csv
+!demo/decision/*.json

@@ -1,0 +1,14 @@
+# Streamlit demo deployment dependencies.
+#
+# This is a MINIMAL set — only packages the presentation layer actually imports.
+# It is intentionally SEPARATE from the scientific `requirements.lock` /
+# `requirements.txt`: the demo does not train models and must not drag the whole
+# research stack onto Streamlit Community Cloud.
+#
+# Tested locally against Python 3.12 (see docs/portfolio_evidence.md).
+
+streamlit==1.49.1
+pandas==2.3.3
+numpy==2.5.3
+pyarrow==25.0.1
+altair==5.5.0

@@ -1,0 +1,108 @@
+{
+  "provenance": "Derived from frozen validation artifacts. No official test partition used.",
+  "note": "All metrics are engine-grouped VALIDATION metrics, not official test-set metrics.",
+  "rul": {
+    "anchor": {
+      "experiment_id": "RUL25_T0_anchor_cycle",
+      "MAE": 32.00835944502761,
+      "RMSE": 43.24654277137821,
+      "R2": 0.7618583927381586,
+      "prognostic_score_last_per_engine": 58.99453472026202
+    },
+    "temporal": {
+      "experiment_id": "RUL25_T4_combined_cyc",
+      "MAE": 31.858618599592297,
+      "RMSE": 44.02015315246671,
+      "R2": 0.7532622560412506,
+      "prognostic_score_last_per_engine": 39.6109107516283
+    },
+    "temporal_best_mae": {
+      "experiment_id": "RUL25_T4_combined_cyc_W3",
+      "MAE": 31.51759439040267,
+      "RMSE": 43.23657183535728,
+      "R2": 0.7619681920814433,
+      "prognostic_score_last_per_engine": 61.67418296074709
+    }
+  },
+  "failure_risk": {
+    "anchor": {
+      "experiment_id": "FR25_T0_anchor_cycle",
+      "threshold": 0.8190954773869347,
+      "recall": 0.8980645161290323,
+      "precision": 0.9050715214564368,
+      "F1": 0.9015544041450776,
+      "PR_AUC": 0.9681621332298658,
+      "ROC_AUC": 0.994962285645761,
+      "TP": 1392,
+      "FP": 146,
+      "TN": 10614,
+      "FN": 158,
+      "positive_rate_val": 0.1259138911454102
+    },
+    "temporal": {
+      "experiment_id": "FR25_T4_combined_cyc",
+      "threshold": 0.7688442211055276,
+      "recall": 0.9064516129032258,
+      "precision": 0.9123376623376624,
+      "F1": 0.9093851132686084,
+      "PR_AUC": 0.9736439083966726,
+      "ROC_AUC": 0.9958602949994004,
+      "TP": 1405,
+      "FP": 135,
+      "TN": 10625,
+      "FN": 145,
+      "positive_rate_val": 0.1259138911454102
+    }
+  },
+  "labels": {
+    "anchor_rul": "Classical anchor (cycle, no temporal)",
+    "temporal_rul": "Causal temporal - paired (combined, W=5)",
+    "temporal_best_rul": "Causal temporal - best-MAE (combined, W=3)",
+    "anchor_fr": "Classical anchor (cycle, H30)",
+    "temporal_fr": "Causal temporal (combined, H30)"
+  },
+  "selection_note": "The RUL 'temporal' card is the combined W=5 configuration paired with the selected failure-risk model; the best-MAE temporal RUL is the combined W=3 configuration (reported separately). No single configuration is presented as the sole 'best RUL'.",
+  "majority_baseline": {
+    "accuracy": 0.8740861088545898,
+    "recall": 0.0,
+    "positive_rate": 0.12591389114541024
+  },
+  "decision": {
+    "note": "RUL is NOT forced into the binary cost framework (section 9). These are predictive-quality diagnostics only; no monetary value.",
+    "end_of_life_rul": 10.0,
+    "anchor": {
+      "mae": 32.00835944502761,
+      "rmse": 43.24654277137821,
+      "worst_abs_p90": 72.4952254856923,
+      "worst_abs_p95": 91.160610049881,
+      "worst_abs_p99": 124.1592888135512,
+      "worst_abs_max": 171.3051802370238,
+      "mean_signed_residual": 5.852508044158744,
+      "mean_signed_residual_short_life": 30.518135636929085,
+      "mean_signed_residual_long_life": -8.853476871759055,
+      "end_of_life_mae": 6.71642212684234,
+      "end_of_life_rows": 550,
+      "lifespan_median_cycle": 223.0,
+      "n_long_life_engines": 25
+    },
+    "temporal": {
+      "mae": 31.858618599592297,
+      "rmse": 44.020153152466705,
+      "worst_abs_p90": 72.86999836276307,
+      "worst_abs_p95": 94.06515291766239,
+      "worst_abs_p99": 134.83767676503146,
+      "worst_abs_max": 182.97027498020026,
+      "mean_signed_residual": 5.499417748908901,
+      "mean_signed_residual_short_life": 28.40113146146612,
+      "mean_signed_residual_long_life": -8.154897558448218,
+      "end_of_life_mae": 4.873056120358,
+      "end_of_life_rows": 550,
+      "lifespan_median_cycle": 223.0,
+      "n_long_life_engines": 25
+    },
+    "mae_change": {
+      "abs_cycles": -0.14974084543531063,
+      "pct": -0.467817932663751
+    }
+  }
+}
